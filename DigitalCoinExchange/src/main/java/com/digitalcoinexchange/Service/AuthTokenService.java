@@ -18,10 +18,6 @@ AuthTokenRepository authTokenRepository;
 
 
 public void addauthToken(AuthToken authtoken) {
-	//System.out.println("ssssssssssss"+authtoken.getToken());
-	
-	//AuthToken authtoken=new AuthToken("5","kuchv");
-	//System.out.println(authtoken.getId()+authtoken.getToken());
 	
 	
 	authTokenRepository.save(authtoken);
@@ -37,6 +33,16 @@ public void deleteAuthToken(AuthToken authtoken) {
 	
 }
 
+/*
 
+public AuthToken getAuthToken(int userId) {
+	
+	System.out.println(userId);
+	///return authTokenRepository.findByUserId(userId);
+	return authTokenRepository.findByuserId(userId);
+	//return null;
+}
+
+*/
 
 }

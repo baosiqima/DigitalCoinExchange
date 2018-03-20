@@ -1,7 +1,6 @@
 package com.digitalcoinexchange.Service;
 
-import java.sql.SQLException; 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +23,19 @@ public class UserService {
 	@Autowired
 	AuthTokenService authtokenservice;
 	
-	
-	public void addUser(User user) {
+	String result;
+	String message;
+	String userToken="";
+	HashMap<String,String> h=new HashMap();
+	HashMap<String,String> addUser=new HashMap();
+	public HashMap<String,String> addUser(User user) {
 		
 		userRepository.save(user);
-		
+		result="Registration Successful";
+		message="";
+		addUser.put(result, message);
+		 
+		return addUser;
 	}
 
 	public List<User>getUsers() {
@@ -40,7 +47,7 @@ public class UserService {
 		
 	}
 
-	public String verify(String username, String password) throws SQLException, InterruptedException {
+	public HashMap<String,String> verify(String username, String password) throws SQLException, InterruptedException {
 		
 		
 		//System.out.println("login successful");
@@ -52,29 +59,49 @@ public class UserService {
 		 if(user1.getPassword().equals(password))
 		 {
 			 
-			////String authtoken=tokengenerator.tokenGen(username, password);
-		//	 System.out.println(authtoken);
+
 			 String email=user1.getEmail();
 			 String phone=user1.getPhone();
-			 //new TokenGenerator(username,password,email,phone);
-			 //AuthToken token = tokenService.getToken("one", "sdffsdf");
+			 int userId=user1.getuserId();
+
 			String token=tokengenerator.TokenGenerator(username, password, email, phone);
 			
+			
 			AuthToken authtoken=new AuthToken("1",token);
+			authtoken.setUser(new User(user1.getuserId(),"","","","",false,""));
 			authtokenservice.addauthToken(authtoken);
 			
-			Thread.currentThread().sleep(250000);
-			authtokenservice.deleteAuthToken(authtoken);
-			 
-			// System.out.println(email);
 			
-			 String d=user1.getCountry();
+			System.out.println(user1.getuserId());
+			//AuthToken auth=authtokenservice.getAuthToken(user1.getuserId());
+			if(true)
+			{
+						
+			result="Login successful";
+			message="Welcome "+" "+username;
+			h.put(result, message);
 			 
-			return "login successful";
+			
+			}
+			
+			else
+			{
+				result="Login Failed";
+				message="Incorrect AuthToken ";
+				h.put(result, message);
+				
+			}
+			Thread.currentThread().sleep(25000);
+			authtokenservice.deleteAuthToken(authtoken);
+			return h;
 		 }
 		 else
 		 {
-			 return "login failed";
+			 result="Login failed";
+				message="Incorrect username and password";
+				h.put(result, message);
+				 
+				return h;
 		 }
 		 	
 

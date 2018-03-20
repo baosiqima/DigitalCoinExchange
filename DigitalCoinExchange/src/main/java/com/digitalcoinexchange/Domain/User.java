@@ -1,5 +1,6 @@
 package com.digitalcoinexchange.Domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,7 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	//@Column(name=userId)
 	int userId;
 	String username;
 	String phone;
@@ -27,7 +29,7 @@ public class User {
 		this.phone = phone;
 		this.country = country;
 		this.password = password;
-		this.enabled = enabled;
+		this.enabled = false;
 		this.email = email;
 	}
 	public int getuserId() {
@@ -64,7 +66,7 @@ public class User {
 		return enabled;
 	}
 	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+		this.enabled =false;
 	}
 	public String getEmail() {
 		return email;

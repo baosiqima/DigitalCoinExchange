@@ -8,5 +8,6 @@ import com.digitalcoinexchange.Domain.AuthToken;
 
 public interface AuthTokenRepository extends CrudRepository<AuthToken,String>{
 
+//public AuthToken findByuserId(int userId);
 	
 }

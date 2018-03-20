@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import com.digitalcoinexchange.User.Security.SendSms;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -26,8 +27,8 @@ public class TokenGenerator {
 	String userName;
 	String password,email,mobile;
 	AuthToken authtoken;
-	
-	
+	SendSms send=new SendSms();
+		
 	
 	public String TokenGenerator(String userName,String password,String email,String mobile) throws SQLException
 	{
@@ -43,10 +44,11 @@ public class TokenGenerator {
 	String token;
 	  token=this.userName+this.password;
 	  System.out.println(token);
-	  return token;
-	 // AuthToken authtoken=new AuthToken("1",token);
-	//  System.out.println("authto"+authtoken.getId()+authtoken.getToken());
-	 // authTokenService.addauthToken(authtoken);
+	  
+	  
+	 SendEmail sendEmail=new SendEmail(email,"AuthToken",token);
+	 // send.m1(mobile, token);
+	 return token;
 	}
 	
 	

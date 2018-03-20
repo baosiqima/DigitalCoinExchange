@@ -7,6 +7,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+
+
 @Entity
 @Table(name="authtoken")
 public class AuthToken {
@@ -26,6 +28,7 @@ public class AuthToken {
 		System.out.println("chek1"+id+"---"+token);
 		this.authId = id;
 		this.token = token;
+		
 	}
 
 	public AuthToken()
@@ -47,5 +50,7 @@ public class AuthToken {
 	}
 	
 	
-
+	public void setUser(User user) {
+		this.user = user;
+	}
 }

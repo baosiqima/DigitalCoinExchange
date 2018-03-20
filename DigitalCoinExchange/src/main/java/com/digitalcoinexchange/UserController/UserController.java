@@ -1,8 +1,9 @@
 package com.digitalcoinexchange.UserController;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
-
+import com.digitalcoinexchange.EncryptPassword.EncryptPassword;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,7 @@ public class UserController {
 	@Autowired
 	UserService userservice;
 
+	EncryptPassword encryptPassword=new EncryptPassword();
 	@RequestMapping("/user")
 	String m1()
 	{
@@ -31,17 +33,44 @@ public class UserController {
 	{
 		return "roles";
 	}
-	
+	/*
 	@RequestMapping("/login/{username}/{password}")
 	String m3(@PathVariable String username,@PathVariable String password) throws SQLException, InterruptedException
 	{
-		return userservice.verify(username,password);
+		return userservice.verify(username,encryptPassword.encryptPassword(password));
+		
+		}
+	*/
+	/*@RequestMapping(method=RequestMethod.POST,value="/logins")
+	String m3(@RequestBody User user) throws SQLException, InterruptedException 
+	{
+		
+		String username=user.getUsername();
+		String password=user.getPassword();
+		return userservice.verify(username,encryptPassword.encryptPassword(password));
+		
+		
+		} */
+	
+	
+	@RequestMapping(method=RequestMethod.POST,value="/logins")
+	HashMap<String,String> m3(@RequestBody User user) throws SQLException, InterruptedException 
+	{
+		
+		String username=user.getUsername();
+		String password=user.getPassword();
+		return userservice.verify(username,encryptPassword.encryptPassword(password));
+		
 		
 		}
 	@RequestMapping(method=RequestMethod.POST,value="/post")
-	public void addUser(@RequestBody User user)
+	public HashMap<String,String> addUser(@RequestBody User user)
 	{
-		userservice.addUser(user);
+		String pass=user.getPassword();
+		
+		String encrPass=encryptPassword.encryptPassword(pass);
+		user.setPassword(encrPass);
+		return userservice.addUser(user);
 		
 	}
 	
