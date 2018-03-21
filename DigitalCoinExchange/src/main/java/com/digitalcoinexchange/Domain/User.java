@@ -3,18 +3,14 @@ package com.digitalcoinexchange.Domain;
 import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.*;
-import javax.persistence.Table;
 
 
 @Entity
@@ -23,7 +19,6 @@ public class User {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	//@Column(name="user_Id")
 	public int userId;
 	String username;
 	String phone;
@@ -32,14 +27,12 @@ public class User {
 	boolean enabled;
 	String email;
 	
-	/*
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_token",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "token_id", referencedColumnName = "authId"))
-    private List<AuthToken> token;
 	
-	*/
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(	name = "user_roles",
+            	joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userId"),
+            	inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "roleId"))
+    private List<Roles> roles;
 	
 	public User()
 	{

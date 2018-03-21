@@ -1,8 +1,9 @@
 package com.digitalcoinexchange.Domain;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 
 
@@ -11,35 +12,36 @@ import javax.persistence.ManyToOne;
 public class Roles {
 	
 	@Id
-	String role_id;
-	String role;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	int roleId;
 	
-	
-	//@ManyToOne
-	// User user;
-	
-	public String getId() {
-		return role_id;
-	}
-	public void setId(String role_id) {
-		this.role_id = role_id;
-	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
-	public Roles(String role_id, String role) {
-		super();
-		this.role_id = role_id;
-		this.role = role;
-	}
-
+	private Role role;
 	
 	public Roles()
 	{
 		
+	}
+
+	public Roles(int roleId, Role role) {
+		super();
+		this.roleId = roleId;
+		this.role = role;
+	}
+
+	public int getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
 	}
 	
 	
