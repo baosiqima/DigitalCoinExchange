@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -11,6 +12,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="authtoken")
+
+
 public class AuthToken {
 	
 	
@@ -18,9 +21,11 @@ public class AuthToken {
 	String authId;
 	String token;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId")
-    private User user;
+	@ManyToOne
+	@JoinColumn(name = "userId")
+	private User user;
+	
+
 	
 	public AuthToken(String id, String token) {
 		
@@ -49,6 +54,11 @@ public class AuthToken {
 		this.token = token;
 	}
 	
+	public User getUser()
+	{
+		return user;
+		
+	}
 	
 	public void setUser(User user) {
 		this.user = user;

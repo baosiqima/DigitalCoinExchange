@@ -24,12 +24,15 @@ public class WalletController {
 	@Autowired
 	WalletService walletService;
 	
-	@RequestMapping(method=RequestMethod.POST,value="/createWallet")
-	String createWallet() 
+	@RequestMapping(method=RequestMethod.POST,value="/createWallet/{userId}")
+	String createWallet(@RequestBody Wallet wallet,@PathVariable int userId) 
 	{
 		
-		//wallet.setUser(new User(userId,"","","","",false,""));
-		return walletService.createWallet();
+		
+		
+		wallet.setUser(new User(userId,"","","","",false,""));
+		
+		return walletService.createWallet(wallet);
 		
 	}
 	

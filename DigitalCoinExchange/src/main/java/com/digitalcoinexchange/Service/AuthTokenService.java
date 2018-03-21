@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.digitalcoinexchange.Domain.AuthToken;
+import com.digitalcoinexchange.Domain.User;
 import com.digitalcoinexchange.Repository.AuthTokenRepository;
 
 @Service
@@ -33,16 +34,30 @@ public void deleteAuthToken(AuthToken authtoken) {
 	
 }
 
-/*
 
-public AuthToken getAuthToken(int userId) {
-	
-	System.out.println(userId);
+/*
+public AuthToken getAuthToken(String authId) {
+		//System.out.println(userId);
 	///return authTokenRepository.findByUserId(userId);
-	return authTokenRepository.findByuserId(userId);
-	//return null;
+	return authTokenRepository.findByAuthId(authId);
+	
 }
 
 */
 
+public AuthToken getAuthToken(User user)
+{
+	 return authTokenRepository.findByUser(user);
+	// return authTokenRepository.findbyUserId(userId);
 }
+
+
+/*
+
+public AuthToken getAuthId(String id) {
+	return authTokenRepository.findOne(id);
+	
+}
+*/
+}
+

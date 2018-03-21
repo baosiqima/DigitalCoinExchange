@@ -12,10 +12,11 @@ public class WalletService {
 	@Autowired
 	WalletRepository walletRepository;
 	
-	public String createWallet() {
+	public String createWallet(Wallet wallet) {
 		
 		Object o=new Object();
-		
+		wallet.setPrivateKey(o.toString());
+		walletRepository.save(wallet);
 		return "wallet created"+"  " + "your wallet key is" +" "+o.toString();
 		
 	}

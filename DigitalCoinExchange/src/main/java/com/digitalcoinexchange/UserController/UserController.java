@@ -16,6 +16,7 @@ import com.digitalcoinexchange.Domain.User;
 import com.digitalcoinexchange.Service.UserService;
 
 @RestController
+@RequestMapping("/users")
 public class UserController {
 	
 	@Autowired
@@ -63,13 +64,15 @@ public class UserController {
 		
 		
 		}
-	@RequestMapping(method=RequestMethod.POST,value="/post")
+	@RequestMapping(method=RequestMethod.POST,value="/save")
 	public HashMap<String,String> addUser(@RequestBody User user)
 	{
 		String pass=user.getPassword();
 		
 		String encrPass=encryptPassword.encryptPassword(pass);
 		user.setPassword(encrPass);
+		
+		
 		return userservice.addUser(user);
 		
 	}

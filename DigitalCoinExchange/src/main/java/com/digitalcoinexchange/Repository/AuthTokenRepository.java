@@ -1,13 +1,16 @@
 package com.digitalcoinexchange.Repository;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.digitalcoinexchange.Domain.AuthToken;
+import com.digitalcoinexchange.Domain.User;
 
 
 
 public interface AuthTokenRepository extends CrudRepository<AuthToken,String>{
 
-//public AuthToken findByuserId(int userId);
-	
+	@Query
+	public AuthToken findByUser(User user);
+	public AuthToken findByAuthId(String authId);
 }

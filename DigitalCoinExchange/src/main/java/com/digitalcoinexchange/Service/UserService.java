@@ -62,19 +62,27 @@ public class UserService {
 
 			 String email=user1.getEmail();
 			 String phone=user1.getPhone();
-			 int userId=user1.getuserId();
+			 int userId=user1.getUserId();
 
 			String token=tokengenerator.TokenGenerator(username, password, email, phone);
 			
+			System.out.println(token);
 			
 			AuthToken authtoken=new AuthToken("1",token);
-			authtoken.setUser(new User(user1.getuserId(),"","","","",false,""));
+			authtoken.setUser(new User(user1.getUserId(),"","","","",false,""));
 			authtokenservice.addauthToken(authtoken);
 			
 			
-			System.out.println(user1.getuserId());
-			//AuthToken auth=authtokenservice.getAuthToken(user1.getuserId());
-			if(true)
+			System.out.println(user1.getUserId());
+			
+			//authtokenservice.getAuthId("2");
+			
+			AuthToken auth=authtokenservice.getAuthToken(user1);
+			
+			
+			//AuthToken auth=authtokenservice.getAuthToken(user1.getUserId());
+			System.out.println(auth.getToken());
+			if(auth.getToken().equals(userToken))
 			{
 						
 			result="Login successful";
@@ -91,8 +99,8 @@ public class UserService {
 				h.put(result, message);
 				
 			}
-			Thread.currentThread().sleep(25000);
-			authtokenservice.deleteAuthToken(authtoken);
+			//Thread.currentThread().sleep(25000);
+			//authtokenservice.deleteAuthToken(authtoken);
 			return h;
 		 }
 		 else

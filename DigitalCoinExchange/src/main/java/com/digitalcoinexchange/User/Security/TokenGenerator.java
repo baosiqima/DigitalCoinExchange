@@ -46,7 +46,7 @@ public class TokenGenerator {
 	  System.out.println(token);
 	  
 	  
-	 SendEmail sendEmail=new SendEmail(email,"AuthToken",token);
+	// SendEmail sendEmail=new SendEmail(email,"AuthToken",token);
 	 // send.m1(mobile, token);
 	 return token;
 	}

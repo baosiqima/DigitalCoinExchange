@@ -26,11 +26,12 @@ public class Wallet {
 	{
 		
 	}
-	public Wallet(int walletId, String walletPassword, String privateKey) {
+	public Wallet(int walletId, String walletPassword, String privateKey,int userId) {
 		super();
 		this.walletId = walletId;
 		this.walletPassword = walletPassword;
 		PrivateKey = privateKey;
+		this.user=new User(userId,"","","","",false,"");
 	}
 	public int getWalletId() {
 		return walletId;
@@ -51,6 +52,16 @@ public class Wallet {
 		PrivateKey = privateKey;
 	}
 	
+	public User getUser()
+	{
+		return user;
+		
+	}
+	
+	public void setUser(User user)
+	{
+		this.user=user;
+	}
 	
 	
 	

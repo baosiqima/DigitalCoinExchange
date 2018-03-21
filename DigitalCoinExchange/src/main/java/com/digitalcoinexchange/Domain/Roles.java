@@ -15,8 +15,8 @@ public class Roles {
 	String role;
 	
 	
-	@ManyToOne
-	 User user;
+	//@ManyToOne
+	// User user;
 	
 	public String getId() {
 		return role_id;
