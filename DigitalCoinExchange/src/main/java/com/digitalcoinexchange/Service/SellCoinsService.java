@@ -4,22 +4,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.digitalcoinexchange.Domain.BuyCoins;
-import com.digitalcoinexchange.Repository.BuyCoinsRepository;
+import com.digitalcoinexchange.Repository.SellCoinsRepository;
 
-@Service 
-public class BuyCoinService {
+@Service
+public class SellCoinsService {
 
-	
 	@Autowired
-	BuyCoinsRepository buyCoinsRepository;
-	public String buyCoins(BuyCoins buyCoins) {
+	SellCoinsRepository sellCoinsRepository;
+	public String buyCoins(BuyCoins sellCoins) {
 	
-	 buyCoinsRepository.save(buyCoins);
+	 sellCoinsRepository.save(sellCoins);
 	 return "ur order is placed";
 	}
 
-	
-	
 	
 	
 }

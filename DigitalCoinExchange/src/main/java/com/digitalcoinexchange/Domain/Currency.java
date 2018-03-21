@@ -11,28 +11,23 @@ public class Currency {
 	
 	@Id
 	int id;
-	long currency;
+	private CurrencyType currency;
 	
 
 	@OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "walletId")
     private Wallet wallet;
-//
-//	@OneToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "userId")
-//    private User user;
-	
+
 	public Currency()
 	{
 		
 	}
 
-	public Currency(int id, long currency, Wallet wallet,int walletId) {
+	public Currency(int id, CurrencyType currency, Wallet wallet) {
 		super();
 		this.id = id;
 		this.currency = currency;
-		//this.wallet = wallet;
-		//this.wallet=new Wallet(walletId,"","",1);
+		this.wallet = wallet;
 	}
 
 	public int getId() {
@@ -43,15 +38,14 @@ public class Currency {
 		this.id = id;
 	}
 
-	public long getCurrency() {
+	public CurrencyType getCurrency() {
 		return currency;
 	}
 
-	public void setCurrency(long currency) {
+	public void setCurrency(CurrencyType currency) {
 		this.currency = currency;
 	}
 
-	
 	public Wallet getWallet() {
 		return wallet;
 	}
@@ -59,6 +53,8 @@ public class Currency {
 	public void setWallet(Wallet wallet) {
 		this.wallet = wallet;
 	}
+
+	
 	
 	/*
 	public User getUser()

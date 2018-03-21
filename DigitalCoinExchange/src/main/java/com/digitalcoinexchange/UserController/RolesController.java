@@ -15,7 +15,7 @@ public class RolesController {
 	@Autowired
 	RolesService rolesService;
 	
-	@RequestMapping(method=RequestMethod.POST,value="/createRoles")
+	@RequestMapping(method=RequestMethod.POST,value="/roles")
 	String createRoles(@RequestBody Roles roles)
 	{
 		return rolesService.addRoles(roles);
