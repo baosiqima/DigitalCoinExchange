@@ -18,13 +18,13 @@ public class BuyCoins {
 	String phoneNumber;
 	String otherContactId;
 	String BankDetails;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User userId;
-	
+
 	public BuyCoins() {
-		
+
 	}
 	public BuyCoins(String orderId, String location, String currencyType, long margin, Long minAmount, Long maxAmount,
 			String phoneNumber, String otherContactId, String bankDetails,User userId) {
@@ -98,12 +98,11 @@ public class BuyCoins {
 	public User getUserId()
 	{
 		return userId;
-		
+
 	}
-	
 	public void setUser(User userId)
 	{
 		this.userId=userId;
 	}
-	
+
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.digitalcoinexchange.Domain.AuthToken;
+import com.digitalcoinexchange.Domain.Role;
 import com.digitalcoinexchange.Domain.User;
 import com.digitalcoinexchange.Repository.UserRepository;
 import com.digitalcoinexchange.User.Security.TokenGenerator;
@@ -71,7 +72,7 @@ public class UserService {
 				System.out.println(token);
 				
 				AuthToken authtoken=new AuthToken(token);
-				authtoken.setUser(new User(user1.getUserId(),"","","","",false,""));
+				authtoken.setUser(new User(user1.getUserId(),"","","","",false,"",Role.USER));
 				authtokenservice.addauthToken(authtoken);
 				
 				

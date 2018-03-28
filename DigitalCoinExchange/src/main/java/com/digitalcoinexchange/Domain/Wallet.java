@@ -16,12 +16,12 @@ public class Wallet {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int walletId;
-	String walletPassword;
-	String PrivateKey;
-	double balance;
+	private int walletId;
+	private String walletPassword;
+	private String PrivateKey;
+	private double balance;
 	double shadowBalance;
-	WalletType walletType;
+	private WalletType walletType;
 	
 	
 	@OneToOne(fetch = FetchType.LAZY)
@@ -32,15 +32,7 @@ public class Wallet {
 	{
 		
 	}
-	/*
-	public Wallet(int walletId, String walletPassword, String privateKey,int userId) {
-		super();
-		this.walletId = walletId;
-		this.walletPassword = walletPassword;
-		PrivateKey = privateKey;
-		this.user=new User(userId,"","","","",false,"");
-	}
-	*/
+	
 
 	public Wallet(int walletId, String walletPassword, String privateKey, double balance, double shadowBalance,
 			WalletType walletType, int userId) {
@@ -51,7 +43,7 @@ public class Wallet {
 		this.balance = balance;
 		this.shadowBalance = shadowBalance;
 		this.walletType = walletType;
-		this.user=new User(userId,"","","","",false,"");
+		this.user=new User(userId,"","","","",false,"",Role.USER);
 	}
 
 	public int getWalletId() {

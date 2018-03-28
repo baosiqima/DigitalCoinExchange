@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import com.digitalcoinexchange.Domain.AuthToken;
 import com.digitalcoinexchange.Service.AuthTokenService;
 
+import ch.qos.logback.classic.Logger;
+
 
 @Service
 public class TokenGenerator {
@@ -33,17 +35,16 @@ public class TokenGenerator {
 		this.password=password;
 		this.mobile=mobile;
 		this.email=email;
-		
-		
+	
 	DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 	Date date = new Date();
 	String token;
 	  token=this.userName+this.password;
-	  System.out.println(token);
 	  
+	  System.out.println("tokenmnnnn"+token);
 	  
-	  SendEmail sendEmail=new SendEmail(email,"AuthToken",token);
-	  send.m1(mobile, token);
+	  new SendEmail(email,"AuthToken",token);
+	//  send.m1(mobile, token);
 	 return token;
 	}
 	

@@ -34,25 +34,6 @@ public class UserController {
 	{
 		return "roles";
 	}
-	/*
-	@RequestMapping("/login/{username}/{password}")
-	String m3(@PathVariable String username,@PathVariable String password) throws SQLException, InterruptedException
-	{
-		return userservice.verify(username,encryptPassword.encryptPassword(password));
-		
-		}
-	*/
-	/*@RequestMapping(method=RequestMethod.POST,value="/logins")
-	String m3(@RequestBody User user) throws SQLException, InterruptedException 
-	{
-		
-		String username=user.getUsername();
-		String password=user.getPassword();
-		return userservice.verify(username,encryptPassword.encryptPassword(password));
-		
-		
-		} */
-	
 	
 	@RequestMapping(method=RequestMethod.POST,value="/logins")
 	HashMap<String,String> m3(@RequestBody User user) throws SQLException, InterruptedException 

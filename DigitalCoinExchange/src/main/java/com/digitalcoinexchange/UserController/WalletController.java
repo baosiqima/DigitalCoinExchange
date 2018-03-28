@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.digitalcoinexchange.Domain.Role;
 import com.digitalcoinexchange.Domain.User;
 import com.digitalcoinexchange.Domain.Wallet;
 import com.digitalcoinexchange.Service.WalletService;
@@ -30,7 +31,7 @@ public class WalletController {
 		
 		
 		
-		wallet.setUser(new User(userId,"","","","",false,""));
+		wallet.setUser(new User(userId,"","","","",false,"",Role.USER));
 		
 		return walletService.createWallet(wallet);
 		

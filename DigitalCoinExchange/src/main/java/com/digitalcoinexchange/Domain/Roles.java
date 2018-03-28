@@ -13,7 +13,7 @@ public class Roles {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int roleId;
+	private int roleId;
 	
 	private Role role;
 	

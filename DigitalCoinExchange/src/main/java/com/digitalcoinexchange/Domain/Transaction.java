@@ -12,15 +12,13 @@ public class Transaction {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int transId;
-	
+	private int transId;
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User userId;
-	
-	public Transaction()
-	{
-		
+
+	public Transaction(){
+
 	}
 
 	public Transaction(int transId, User userId) {
@@ -45,10 +43,4 @@ public class Transaction {
 		this.userId = userId;
 	}
 
-	
-	
-	
-	
-	
-	
 }

@@ -8,27 +8,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name="authtoken")
-
-
 public class AuthToken {
-	
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	int authId;
-	String token;
-	
+	private int authId;
+	private String token;
+
 	@ManyToOne
 	@JoinColumn(name = "userId")
 	private User user;
 
-	public AuthToken()
-	{
-		
+	public AuthToken(){
+
 	}
 	public AuthToken( String token) {
 		super();
@@ -60,8 +53,8 @@ public class AuthToken {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
-	
-	
+
+
+
+
 }

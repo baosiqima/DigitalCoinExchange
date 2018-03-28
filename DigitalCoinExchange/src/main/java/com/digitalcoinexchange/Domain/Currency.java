@@ -10,7 +10,7 @@ import javax.persistence.OneToOne;
 public class Currency {
 	
 	@Id
-	int id;
+	private int id;
 	private CurrencyType currency;
 	
 
