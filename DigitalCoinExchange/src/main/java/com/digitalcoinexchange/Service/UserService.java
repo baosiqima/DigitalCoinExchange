@@ -1,7 +1,9 @@
 package com.digitalcoinexchange.Service;
 
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.digitalcoinexchange.Domain.AuthToken;
 import com.digitalcoinexchange.Domain.User;
 import com.digitalcoinexchange.Repository.UserRepository;
-import com.digitalcoinexchange.User.Security.SendEmail;
 import com.digitalcoinexchange.User.Security.TokenGenerator;
 
 @Service
@@ -23,16 +24,16 @@ public class UserService {
 	@Autowired
 	AuthTokenService authtokenservice;
 	
-	String result;
-	String message;
+	String result,message;
 	String userToken="";
-	HashMap<String,String> h=new HashMap();
-	HashMap<String,String> addUser=new HashMap();
+	HashMap<String,String> h=new HashMap<String,String>();
+	
+	HashMap<String,String> addUser=new HashMap<String,String>();
 	public HashMap<String,String> addUser(User user) {
 		
 		userRepository.save(user);
 		result="Registration Successful";
-		message="";
+		
 		addUser.put(result, message);
 		 
 		return addUser;
@@ -47,72 +48,87 @@ public class UserService {
 		
 	}
 
-	public HashMap<String,String> verify(String username, String password) throws SQLException, InterruptedException {
+	public HashMap<String,String> verify(String username, String password,String role) throws SQLException, InterruptedException {
 		
 		
-		//System.out.println("login successful");
-		
+		try
+		{
+			h.clear();
 		 User user1= userRepository.findByUsername(username);
 		
 		 System.out.println(user1.getPassword());
 		 
-		 if(user1.getPassword().equals(password))
+		 if(user1.getPassword().equals(password)&&role.equals("USER"))
 		 {
 			 
-
-			 String email=user1.getEmail();
-			 String phone=user1.getPhone();
-			 int userId=user1.getUserId();
-
-			String token=tokengenerator.TokenGenerator(username, password, email, phone);
-			
-			System.out.println(token);
-			
-			AuthToken authtoken=new AuthToken("1",token);
-			authtoken.setUser(new User(user1.getUserId(),"","","","",false,""));
-			authtokenservice.addauthToken(authtoken);
-			
-			
-			System.out.println(user1.getUserId());
-			
-			//authtokenservice.getAuthId("2");
-			
-			AuthToken auth=authtokenservice.getAuthToken(user1);
-			
-			
-			//AuthToken auth=authtokenservice.getAuthToken(user1.getUserId());
-			System.out.println(auth.getToken());
-			if(auth.getToken().equals(userToken))
-			{
-						
-			result="Login successful";
-			message="Welcome "+" "+username;
-			h.put(result, message);
-			 
-			
-			}
-			
-			else
-			{
-				result="Login Failed";
-				message="Incorrect AuthToken ";
-				h.put(result, message);
+				 
+				 String email=user1.getEmail();
+				 String phone=user1.getPhone();
 				
-			}
+	
+				String token=tokengenerator.TokenGenerator(username, password, email, phone);
+				
+				System.out.println(token);
+				
+				AuthToken authtoken=new AuthToken(token);
+				authtoken.setUser(new User(user1.getUserId(),"","","","",false,""));
+				authtokenservice.addauthToken(authtoken);
+				
+				
+				System.out.println(user1.getUserId());
+		
+				
+				AuthToken auth=authtokenservice.getAuthToken(user1);
+	
+				System.out.println(auth.getToken());
+				
+				if(auth.getToken()!=null)
+				{	
+					h.clear();		
+					String loginStatus="LoginSuccessful";
+					String message="LoginSuccessful";
+					h.put(loginStatus, message);
+				 
+				
+				}
+				
+				else
+				{
+					h.clear();
+					String loginStatus="LoginFailed";
+					String message="LoginFailed";
+					h.put(loginStatus, message);
+				}
 			//Thread.currentThread().sleep(25000);
 			//authtokenservice.deleteAuthToken(authtoken);
+			
+		 
+			
 			return h;
 		 }
+		
 		 else
 		 {
-			 result="Login failed";
-				message="Incorrect username and password";
-				h.put(result, message);
+			 h.clear();
+			 String loginStatus="LoginFailed";
+			String	message="LoginFailed";
+				h.put(loginStatus, message);
 				 
 				return h;
 		 }
+		}
+		
+		 catch(NullPointerException ne)
+			{
+				System.out.println("incorrect username");
+				h.clear();
+				String loginStatus="LoginFailed";
+				String message="LoginFailed";
+				h.put(loginStatus, message);
+				 return h;
+			}
 		 	
-
+		
 		
 		
 		

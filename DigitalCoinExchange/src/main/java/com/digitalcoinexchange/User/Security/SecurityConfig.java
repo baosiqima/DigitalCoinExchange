@@ -1,4 +1,4 @@
-package com.digitalcoinexchange.User.Security;
+/*package com.digitalcoinexchange.User.Security;
 
 
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -35,13 +35,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
 	
-	/*
+	
 	JdbcUserDetailsManagerConfigurer user=auth.jdbcAuthentication().dataSource(dataSource)
 				.usersByUsernameQuery("select username,password,enabled from user where username=?")
 				.authoritiesByUsernameQuery("select username, role from user_roles where username=?");
-	*/
 	
-	/*	String sql="select username,password from user where username='"+"username"+"'";
+	
+		String sql="select username,password from user where username='"+"username"+"'";
 		
 		List l=jdbcTemplate.queryForList(sql);
 		System.out.println(l);
@@ -53,20 +53,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			
 		}
 		
-	*/	
-		
+	
+		auth.jdbcAuthentication().dataSource(dataSource).usersByUsernameQuery("select username,password,enabled from user where username=?").
+		authoritiesByUsernameQuery("select username, role from user_roles where username=?").and()
 		
 		
 	}
  
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-	/*	http.authorizeRequests().antMatchers("/user/**").permitAll().antMatchers("/roles").hasRole("USER")
+		http.authorizeRequests().antMatchers("/user/**").permitAll().antMatchers("/roles").hasRole("USER")
 				.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
 				.permitAll();
-		*/
+		
 		
 		http.csrf().disable().authorizeRequests().antMatchers("/user/**").hasRole("USER").and().formLogin();
 		//http.exceptionHandling().accessDeniedPage("/403");
 	}
-}
+}*/

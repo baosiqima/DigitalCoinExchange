@@ -13,4 +13,5 @@ public interface AuthTokenRepository extends CrudRepository<AuthToken,String>{
 	@Query
 	public AuthToken findByUser(User user);
 	public AuthToken findByAuthId(String authId);
+	public AuthToken findByToken(String token);
 }

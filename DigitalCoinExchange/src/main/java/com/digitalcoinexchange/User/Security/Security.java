@@ -1,6 +1,8 @@
-/*
+
 
 package com.digitalcoinexchange.User.Security;
+
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,23 +13,27 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 public class Security extends WebSecurityConfigurerAdapter 
 {
-/*	
+	@Autowired
+	DataSource dataSource;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers("/coins").hasAnyRole("admin","user").and().formLogin();
-		
-		
+		http.csrf().disable().authorizeRequests().antMatchers("/login")
+		.hasAnyRole("admin","user").and().formLogin().defaultSuccessUrl("/success");
+	
 	}
 	
 	@Autowired
 	public void configuration(AuthenticationManagerBuilder auth) throws Exception
 	{
-		auth.inMemoryAuthentication().withUser("gursahib29").password("612844261").roles("user","admin");
-		
+		auth.jdbcAuthentication().dataSource(dataSource)
+		  .usersByUsernameQuery("select username, password, enabled"
+			            + " from user where username=?")
+		  	.authoritiesByUsernameQuery("select username,roles from role where username=?");
+			        
 		
 		
 		
 	}
 	
 }
-*/

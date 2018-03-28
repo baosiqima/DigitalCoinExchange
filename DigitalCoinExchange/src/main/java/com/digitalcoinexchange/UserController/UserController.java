@@ -58,9 +58,10 @@ public class UserController {
 	HashMap<String,String> m3(@RequestBody User user) throws SQLException, InterruptedException 
 	{
 		
+		
 		String username=user.getUsername();
 		String password=user.getPassword();
-		return userservice.verify(username,encryptPassword.encryptPassword(password));
+		return userservice.verify(username,encryptPassword.encryptPassword(password),"USER");
 		
 		
 		}
@@ -86,4 +87,14 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(method=RequestMethod.GET,value="/login")
+	String m4()
+	{
+		return "login successful";
+	}
+	@RequestMapping(method=RequestMethod.GET,value="/success")
+	String m5()
+	{
+		return "login successful";
+	}
 }

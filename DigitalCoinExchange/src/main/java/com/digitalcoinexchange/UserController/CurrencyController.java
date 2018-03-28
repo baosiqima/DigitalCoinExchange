@@ -21,7 +21,7 @@ public class CurrencyController {
 	String addCurrency(Currency currency,@PathVariable int walletId,@PathVariable int userId)
 	{
 
-		currency.setWallet(new Wallet(walletId,"","",userId));
+		currency.setWallet(new Wallet(walletId,"","",0.00,0.00,null,userId));
 		return currencyService.addCurrency(currency);
 		
 	}
